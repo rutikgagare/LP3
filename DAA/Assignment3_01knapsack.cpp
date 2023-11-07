@@ -21,10 +21,30 @@ int knapSack(int index, int capacity, int wt[], int val[], vector<vector<int>> d
 } 
 
 int main(){ 
-	int profit[] = { 60, 100, 120 }; 
-	int weight[] = { 10, 20, 30 }; 
-	int capacity = 50; 
-	int n = sizeof(profit) / sizeof(profit[0]); 
+
+	int n;
+	cout<<"Enter number of items : ";
+	cin>>n;
+
+	int profit[n];
+	int weight[n];
+
+	for(int i = 0; i<n; i++){
+		int p,w;
+		cout<<"Enter profit and weight : ";
+		cin>>p>>w;
+		profit[i] = p;
+		weight[i] = w; 
+	}
+	
+	int capacity;
+	cout<<"Enter capacity : ";
+	cin>>capacity;
+
+	// int profit[] = { 60, 100, 120 }; 
+	// int weight[] = { 10, 20, 30 }; 
+	// int capacity = 50; 
+	// int n = sizeof(profit) / sizeof(profit[0]); 
 
 	vector<vector<int>> dp(n, vector<int>(capacity+1, -1));
 	

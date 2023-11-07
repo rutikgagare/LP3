@@ -39,12 +39,14 @@ double solve( vector<Item> v, int n, int capacity ){
 int main(){
 
 	int n;
-    cin >> n; // number of weights
+    cout<<"Enter number of items : ";
+    cin >> n; 
 
     vector<Item> v(n);
 
     for(int i = 0; i < n; ++i){
         double weight, profit;
+        cout<<"Enter profit weight : ";
         cin >> profit >> weight;
         
 		v[i].weight = weight;
@@ -54,6 +56,7 @@ int main(){
     sort(v.begin(), v.end(), cmp);
 
     double capacity;
+    cout<<"Enter capacity : ";
     cin >> capacity;
 
 	cout << "Final profit = " << solve(v , n , capacity)<< endl;
