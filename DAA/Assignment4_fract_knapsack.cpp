@@ -1,70 +1,61 @@
-// C++ program to solve fractional Knapsack Problem
-
 #include <bits/stdc++.h>
 using namespace std;
 
-// Structure for an item which stores weight and
-// corresponding value of Item
-struct Item {
-	int profit, weight;
+// fractional knapsack
+// greedy approach
+// TC - O(nlogn)
+// SC - O(n)
 
-	// Constructor
-	Item(int profit, int weight)
-	{
-		this->profit = profit;
-		this->weight = weight;
-	}
+class Item{
+	public:
+	int weight;
+	int profit;
 };
 
-// Comparison function to sort Item 
-// according to profit/weight ratio
-static bool cmp(struct Item a, struct Item b)
-{
-	double r1 = (double)a.profit / (double)a.weight;
-	double r2 = (double)b.profit / (double)b.weight;
-	return r1 > r2;
+static bool cmp(class Item a, class Item b){
+    double r1 = (double)a.profit / (double)a.weight;
+    double r2 = (double)b.profit / (double)b.weight;
+    return r1 > r2;
+    
 }
 
-// Main greedy function to solve problem
-double fractionalKnapsack(int W, struct Item arr[], int N)
-{
-	// Sorting Item on basis of ratio
-	sort(arr, arr + N, cmp);
+double solve( vector<Item> v, int n, int capacity ){
+    
+    double totalProfit = 0;
 
-	double finalvalue = 0.0;
+    for (int i = 0; i < n; ++i){
+        if (capacity >= v[i].weight){
+            capacity -= v[i].weight;
+            totalProfit += v[i].profit;
+        }
+        else{
+            totalProfit += ((double(v[i].profit)/double(v[i].weight)) * capacity);
+            break;
+        }
+    }
+    
+	return totalProfit;
+}
+int main(){
 
-	// Looping through all items
-	for (int i = 0; i < N; i++) {
-		
-		// If adding Item won't overflow, 
-		// add it completely
-		if (arr[i].weight <= W) {
-			W -= arr[i].weight;
-			finalvalue += arr[i].profit;
-		}
+	int n;
+    cin >> n; // number of weights
 
-		// If we can't add current Item, 
-		// add fractional part of it
-		else {
-			finalvalue
-				+= arr[i].profit
-				* ((double)W / (double)arr[i].weight);
-			break;
-		}
-	}
+    vector<Item> v(n);
 
-	// Returning final value
-	return finalvalue;
+    for(int i = 0; i < n; ++i){
+        double weight, profit;
+        cin >> profit >> weight;
+        
+		v[i].weight = weight;
+		v[i].profit = profit;
+    }
+
+    sort(v.begin(), v.end(), cmp);
+
+    double capacity;
+    cin >> capacity;
+
+	cout << "Final profit = " << solve(v , n , capacity)<< endl;
 }
 
-// Driver code
-int main()
-{
-	int W = 50;
-	Item arr[] = { { 60, 10 }, { 100, 20 }, { 120, 30 } };
-	int N = sizeof(arr) / sizeof(arr[0]);
-
-	// Function call
-	cout << fractionalKnapsack(W, arr, N);
-	return 0;
-}

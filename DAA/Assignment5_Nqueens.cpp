@@ -51,7 +51,6 @@ void solve(vector<vector<int>> &board,vector<vector<string>> &ans,int col,int n,
             upDaigonalVisited[n-1+col-i] = false;
             downDaigonalVisited[col+i] = false;
         }
-
     }
 }
 

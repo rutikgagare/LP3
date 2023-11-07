@@ -27,7 +27,7 @@ int main(){
 	int n = sizeof(profit) / sizeof(profit[0]); 
 
 	vector<vector<int>> dp(n, vector<int>(capacity+1, -1));
+	
 	cout << knapSack(n-1, capacity, weight, profit, dp); 
 	return 0; 
 } 
-
