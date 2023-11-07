@@ -68,7 +68,10 @@ int main(){
 
     solve(board,ans,0,n,rowVisited,upDaigonalVisited,downDaigonalVisited);
 
+    int cnt = 1;
+
     for(auto i: ans){
+        cout<<cnt++<<endl;
         for(auto j:i){
             cout<<j<<endl;
         }

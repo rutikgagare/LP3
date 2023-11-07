@@ -2,11 +2,13 @@
 
 #include<iostream>
 using namespace std;
+int x = 0;
 
 int recursive_fibonacci(int n){
     if(n == 0 || n == 1){
         return n;
     }
+    x++;
     return recursive_fibonacci(n-1)+recursive_fibonacci(n-2);
 }
 
@@ -35,6 +37,8 @@ int main(){
     cout<<n<<"th fibonacci number is : "<<recursive_fibonacci(n)<<endl;
 
     cout<<n<<"th fibonacci number is : "<<fibonacci(n)<<endl;
+
+    cout<<x<<endl;
 
     return 0;
 }
